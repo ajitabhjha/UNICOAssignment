@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unico Assignment</title>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-numeric.js"></script>
+        <script src="js/unico.js"></script>
+        <style>
+            * {
+                font-family: tahoma;
+                font-size: 13px;
+                color: #003456;
+            }
+            h2 {
+                color:red;
+            }
+            #main {
+                width:800px;
+                min-height:700px;
+                margin:0 auto;
+                border : solid 1px maroon;
+            }
+            #headerContent {
+                width:100%;
+                height:70px;
+                background-color: lightgreen;
+            }
+
+            #content {
+                height: 630px;
+                width: 100%;
+                margin-top:2px;
+                background-color: beige;
+            }
+            #leftMenu {
+                height: 100%;
+                width: 250px;
+                float:left;
+                border-right: solid 1px maroon;
+
+
+            }
+            #rightContent {
+                height: 100%;
+                width: 540px;
+                float: right;
+            }
+            #footerContent {
+                margin-top:2px;
+                width:100%;
+                height:30px;
+                float:none;
+                border:solid 1px blue;
+            }
+            #menu {
+                margin-top:15px;
+            }
+            #menuItem1, #menuItem2, #menuItem3, #menuItem4 {
+                margin-top: 5px;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="main">
+            <div id="headerContent">
+                <img src="images/unico_assignment.png" border="0" height="60" style="margin-left:200px"/>
+                <div style="float:right"><a href="readme.txt">Readme</a></div>
+                <hr style="width:99%;color:maroon;"/>
+            </div>
+            <div id="content">
+                <div id="leftMenu">
+                    <ul id="menu" >
+                        <li id="menuItem1"><a href="#" onclick="showPushRESTForm();
+                                return false;">Push Operands (RESTFul)</a></li>
+                        <li id="menuItem2"><a href="#" onclick="callListDBREST();
+                                return false;">List From DB (RESTFul)</a></li>
+                        <li id="menuItem3"><a href="#" onclick="callCalcGSTSOAP();
+                                return false;">Calculate GCD (SOAP)</a></li>
+                        <li id="menuItem4"><a href="#" onclick="callCalcGSTSumSOAP();
+                                return false;">Calculate Sum of GCDs (SOAP)</a></li>
+                    </ul>
+                </div>
+                <div id="rightContent">
+                    <h2>Select a Menu Item from Left Menu</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="hiddenDIVs" style="display:none">
+            <!-- display push form -->
+            <div id="displayPushForm">
+                <blockquote>
+                    <h2>Push Operands</h2>
+                    This form calls a RESTFul service "http://localhost:8080/UnicoAssignment-war/jms/push" and uses POST method form to capture parameters.
+                    <br/>Enter Non-negative and Non-Zero integers in following text boxes and click Submit. 
+                    <br/>Click Reset to clear form.
+                    <br/>
+                    <form name="frmJMSPostTemp" id="frmJMSPostTemp" action="rest/jms/push" method="post">
+                        <table width="70%">
+                            <tr>
+                                <td width="30%" align="right"><label for="i1"><b>i1</b></label></td>
+                                <td><input type="text" name="i1" id="i1" class="numeric"/></td>
+                            </tr>
+                            <tr>
+                                <td width="30%" align="right"><label for="i2"><b>i2</b></label></td>
+                                <td><input type="text" name="i2" id="i2" class="numeric"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center"><input type="submit" onclick="callPushREST();
+                                        return false;"/> <input type="reset"/> </td>
+                            </tr>
+                        </table>
+                    </form>
+                </blockquote>
+            </div>
+            <!-- display pop list -->
+            <div id="displayList">
+                <h2>Following elements are present in database. Please note database is updated only when GCD is calculated for two JMS elements.</h2>
+            </div>
+            <!-- display GCD -->
+            <div id="displayGCD">
+                <h2>The GCD of two elements from JMS is below. The two operands along with their GCD has been added to database now and is available for listing.</h2>
+            </div>
+            <!-- display GCD sum -->
+            <div id="displayGCDSum">
+                <h2>The Sum of all GCDs from database is below.</h2>
+            </div>
+            
+            <!-- display loading-->
+            <div id="displayLoading">
+                <h2>Please wait...</h2>
+            </div>
+        </div>
+    </body>
+</html>
